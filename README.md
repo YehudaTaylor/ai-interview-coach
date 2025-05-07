@@ -2,6 +2,8 @@
 
 An AI-powered interview preparation tool that helps job seekers practice their interview skills. The application uses GPT-4 to simulate realistic interview scenarios based on your CV and the job description you're applying for.
 
+![AI Interview Coach Screenshot](assets/screenshot.png)
+
 ## Features
 - Upload your CV and job description
 - Receive personalized interview questions based on your profile
