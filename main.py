@@ -1,10 +1,11 @@
 from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-import openai
-import os
+from openai import OpenAI
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+import os
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 app = FastAPI()
 
@@ -37,14 +38,12 @@ def start_interview(data: InterviewInput):
     User's last response: {data.user_response}
     """
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-        max_tokens=300
-    )
+    response = client.chat.completions.create(model="gpt-4",
+    messages=[{"role": "user", "content": prompt}],
+    temperature=0.7,
+    max_tokens=300)
 
-    return {"message": response.choices[0].message['content']}
+    return {"message": response.choices[0].message.content}
 
 @app.post("/upload-cv")
 def upload_cv(file: UploadFile = File(...)):
@@ -55,3 +54,4 @@ def upload_cv(file: UploadFile = File(...)):
 def upload_jd(file: UploadFile = File(...)):
     contents = file.file.read().decode("utf-8")
     return {"job_description": contents}
+
