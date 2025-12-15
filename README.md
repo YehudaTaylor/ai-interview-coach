@@ -1,3 +1,6 @@
+## A vibe code experiment
+Built using Cursor.
+
 # AI Interview Coach
 
 An AI-powered interview preparation tool that helps job seekers practice their interview skills. The application uses GPT-4 to simulate realistic interview scenarios based on your CV and the job description you're applying for.
